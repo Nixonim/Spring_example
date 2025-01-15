@@ -7,10 +7,21 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context.xsd">
 
+<context:property-placeholder location="application.properties"/>
+<!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+<!--        <property name="locations" value="application.properties"/>-->
+<!--    </bean>-->
+
+    <bean class="bpp.InjectBeanPostProcessor"/>
+
+    <bean id="driver" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="${db.driver}"/>
+    </bean>
+
     <bean id="Connection1" name="C1,C2"
-          class="ConnectionDB.ConnectionPool">
-        <constructor-arg value="postgres"/>
-        <constructor-arg value="10"/>
+          class="ConnectionDB.ConnectionPool" >
+        <constructor-arg name="username" type="java.lang.String" value="${db.username}"/>
+        <constructor-arg name="poolSize" type="java.lang.Integer" value="${db.pool.size}"/>
         <constructor-arg>
             <list>
                 <value>arg1=value1</value>
@@ -26,7 +37,5 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 
     </bean>
 
-<!--    <bean id="Connection2"-->
-<!--          class="ConnectionDB.ConnectionPool">-->
-<!--    </bean>-->
+    <bean id="ConnectRepo" class="ConnectionDB.ConnectionRepository"> </bean>
 </beans>
