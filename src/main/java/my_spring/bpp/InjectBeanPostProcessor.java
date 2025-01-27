@@ -1,14 +1,16 @@
-package bpp;
+package my_spring.bpp;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import java.util.Arrays;
 
-public class InjectBeanPostProcessor  implements BeanPostProcessor, ApplicationContextAware {
+@Component
+public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Override
@@ -24,5 +26,5 @@ public class InjectBeanPostProcessor  implements BeanPostProcessor, ApplicationC
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-    }
+   }
 }
